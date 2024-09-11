@@ -1,4 +1,3 @@
-
 package BinarySearch;
 
 import java.util.Random;
@@ -66,5 +65,14 @@ public class Helper {
             }
         }
         return -1; // value not found 
+    }
+
+    static int linearSearch(int[] arr, int value) {
+        for (int i = 0; i < arr.length; i++) {
+            if (value == arr[i]) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

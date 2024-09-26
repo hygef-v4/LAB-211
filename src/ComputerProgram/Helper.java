@@ -17,19 +17,31 @@ public class Helper {
     public static void normalCalculator() {
         System.out.println("----- Normal Calculator -----");
         System.out.print("Enter number 1: ");
-        double num1 = getDoubleNumber();
-        System.out.println("Enter Operator: ");
-        String operator = inputOperator();
-        System.out.print("Enter number 2: ");
-        double num2 = getDoubleNumber();
+        double memory = getDoubleNumber();  // Initialize memory with the first number
 
-        double result = calculate(num1, operator, num2);
-        if (!Double.isNaN(result)) {
-            System.out.println("Result: " + result);
-        } else {
-            System.err.println("Calculation error occurred.");
+        while (true) {
+            System.out.print("Enter Operator: ");
+            String operator = inputOperator();
+
+            // Check if the user wants to get the final result
+            if (operator.equals("=")) {
+                System.out.println("Result: " + memory);
+                break;
+            }
+
+            System.out.print("Enter number 2: ");
+            double num = getDoubleNumber();  // Get the next number to operate with
+
+            // Calculate the new memory based on the current memory, operator, and new number
+            memory = calculate(memory, operator, num);
+
+            // If calculation failed (e.g., due to division by zero), break the loop
+            if (Double.isNaN(memory)) {
+                System.err.println("Calculation error occurred.");
+                break;
+            }
+            System.out.println("Memory: " + memory);
         }
-
     }
 
     public static double calculate(double a, String operator, double b) {
@@ -88,10 +100,11 @@ public class Helper {
                     || operator.equals("-")
                     || operator.equals("*")
                     || operator.equals("/")
-                    || operator.equals("^")) {
+                    || operator.equals("^")
+                    || operator.equals("=")) {
                 return operator;
             } else {
-                System.err.print("Invalid operator. Please enter a valid operator (+, -, *, /, ^): ");
+                System.err.print("Invalid operator. Please enter a valid operator (+, -, *, /, ^, =): ");
             }
         }
     }

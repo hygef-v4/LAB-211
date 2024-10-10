@@ -25,7 +25,7 @@ public class Main {
                     System.out.println("Exiting program...");
                     return; 
                 default:
-                    throw new AssertionError();
+                    System.err.println("Invalid choice!");
             }
         }
     }
